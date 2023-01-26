@@ -1,6 +1,6 @@
 
 class ApplicationController < ActionController::Base
-  layout(false)
+  layout("wrapper.html.erb")
 
   # Add your actions below this line
   # ================================
@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def play_rock
-    render({ :template => "game_templates/user_rock.html.erb" })
+    render({ :template => "game_templates/user_rock.html.erb", :layout => "wrapper.html.erb" })
   end
 
   def play_paper
@@ -26,6 +26,20 @@ class ApplicationController < ActionController::Base
     end
 
     render({ :template => "game_templates/user_paper.html.erb"})
+  end 
+
+  def play_scissors
+  @comp_move = ["rock", "paper", "scissors"].sample
+
+    if @comp_move == "rock"
+      @outcome = "lost"
+    elsif @comp_move == "paper"
+      @outcome == "won"
+    else @comp_move == "scissors"
+      @outcome = "tied"
+    end 
+    
+    render({ :template => "game_templates/user_scissors.html.erb"})
   end 
 
 end
